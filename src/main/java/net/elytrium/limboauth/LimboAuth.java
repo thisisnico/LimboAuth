@@ -80,14 +80,7 @@ import net.elytrium.limboapi.api.file.SchematicFile;
 import net.elytrium.limboapi.api.file.StructureFile;
 import net.elytrium.limboapi.api.file.WorldFile;
 import net.elytrium.limboapi.api.player.GameMode;
-import net.elytrium.limboauth.command.ChangePasswordCommand;
-import net.elytrium.limboauth.command.DestroySessionCommand;
-import net.elytrium.limboauth.command.ForceChangePasswordCommand;
-import net.elytrium.limboauth.command.ForceUnregisterCommand;
-import net.elytrium.limboauth.command.LimboAuthCommand;
-import net.elytrium.limboauth.command.PremiumCommand;
-import net.elytrium.limboauth.command.TotpCommand;
-import net.elytrium.limboauth.command.UnregisterCommand;
+import net.elytrium.limboauth.command.*;
 import net.elytrium.limboauth.event.AuthPluginReloadEvent;
 import net.elytrium.limboauth.event.PreAuthorizationEvent;
 import net.elytrium.limboauth.event.PreEvent;
@@ -111,7 +104,7 @@ import org.slf4j.Logger;
 @Plugin(
     id = "limboauth",
     name = "LimboAuth",
-    version = BuildConstants.AUTH_VERSION,
+    version = "1.0.6",
     url = "https://elytrium.net/",
     authors = {
         "hevav",
@@ -315,6 +308,7 @@ public class LimboAuth {
     manager.register("forceunregister", new ForceUnregisterCommand(this, this.server, this.playerDao), "forceunreg");
     manager.register("changepassword", new ChangePasswordCommand(this.playerDao), "changepass");
     manager.register("forcechangepassword", new ForceChangePasswordCommand(this.server, this.playerDao), "forcechangepass");
+    manager.register("forceregister", new ForceRegisterCommand(this.server, this.playerDao), "forcereg");
     manager.register("destroysession", new DestroySessionCommand(this));
     if (Settings.IMP.MAIN.ENABLE_TOTP) {
       manager.register("2fa", new TotpCommand(this.playerDao), "totp");
